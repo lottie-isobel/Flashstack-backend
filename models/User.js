@@ -5,6 +5,7 @@ class User {
       this.id = userid;
       this.first_name = first_name;
       this.last_name = last_name;
+      this.email = email;
       this.password = password;
     }
   
@@ -18,7 +19,7 @@ class User {
       return new User(response.rows[0]);
     }
   
-    static async getOneByUsername(email) {
+    static async getOneByEmail(email) {
       const response = await db.query("SELECT * FROM Volunteer WHERE email = $1", [
         email,
       ]);
