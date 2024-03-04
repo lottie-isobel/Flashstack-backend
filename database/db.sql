@@ -1,3 +1,9 @@
+DROP TABLE IF EXISTS "flashcards";
+DROP TABLE IF EXISTS "decks";
+DROP TABLE IF EXISTS "notes";
+DROP TABLE IF EXISTS "tokens";
+DROP TABLE IF EXISTS "users";
+
 CREATE TABLE "tokens"(
     "tokenid" INTEGER NOT NULL,
     "token" VARCHAR(255) NOT NULL,
