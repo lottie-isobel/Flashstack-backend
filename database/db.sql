@@ -1,7 +1,7 @@
 CREATE TABLE "tokens"(
     "tokenid" INTEGER NOT NULL,
     "token" VARCHAR(255) NOT NULL,
-    "userid" INTEGER NOT NULL,
+    "userid" INTEGER NOT NULL
 );
 
 ALTER TABLE
