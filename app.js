@@ -1,4 +1,4 @@
-
+const userRouter = require('./routes/userRoutes')
 
 const express = require('express');
 const cors = require('cors');
@@ -16,5 +16,7 @@ app.get("/", (req, res) => {
         description: "Flashstacks is an educational app"
     })
 })
+
+app.use("/user", userRouter)
 
 module.exports = app;
