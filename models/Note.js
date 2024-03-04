@@ -34,7 +34,7 @@ class Note {
         return response.rows.map(n => new Note(n));
     }
 
-    static async getByd(id){
+    static async getByd(id) {
         const response = await db.query(
             "SELECT * FROM notes WHERE id = $1", [id]
         )
@@ -42,6 +42,36 @@ class Note {
             throw new Error("No Note Found With This Id in the Database");
         }
         return response.rows.map(n => new Note(n));
+    }
+
+    static async create(data) {
+        try {
+            const { userid, content, category } = data
+            const response = await db.query("INSERT INTO notes (userid, content, category) VALUES ($1, $2, $3) RETURNING *", [userid, content, category])
+            return new Note(response.rows[0])
+        } catch (error) {
+            throw new Error("Could not create note.")
+        }
+    }
+
+    async update(data) {
+        try {
+            const { content, category } = data
+            const response = await db.query("UPDATE notes SET content = $1, category = $2 WHERE id = $3 RETURNING *", [content, category, this.id])
+            return new Note(response.rows[0])
+        } catch (error) {
+            throw new Error("Could not update note.")
+        }
+    }
+
+    async destroy() {
+        try {
+            const note_id = this.id
+            const response = await db.query("DELETE FROM notes WHERE id = $1 RETURNING *", [note_id])
+            return new Note(response.rows[0])
+        } catch (error) {
+            throw new Error("Could not delete note.")
+        }
     }
 }
 
