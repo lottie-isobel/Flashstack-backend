@@ -1,4 +1,5 @@
 const userRouter = require('./routes/userRoutes')
+const noteRouter = require('./routes/noteRoutes')
 
 const express = require('express');
 const cors = require('cors');
@@ -18,5 +19,6 @@ app.get("/", (req, res) => {
 })
 
 app.use("/user", userRouter)
+app.use("/note", noteRouter)
 
 module.exports = app;
