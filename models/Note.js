@@ -34,7 +34,7 @@ class Note {
         return response.rows.map(n => new Note(n));
     }
 
-    static async getByd(id) {
+    static async getById(id) {
         const response = await db.query(
             "SELECT * FROM notes WHERE id = $1", [id]
         )
