@@ -4,6 +4,8 @@ const logRoutes = require('./middleware/logger');
 
 const app = express();
 
+const userRouter = require('./routes/userRoutes')
+const noteRouter = require('./routes/noteRoutes')
 const flashcardRouter = require('./routes/flashcardRoutes');
 
 
@@ -19,5 +21,8 @@ app.get("/", (req, res) => {
         description: "This is the root of the Flashstacks API!"
     })
 })
+
+app.use("/user", userRouter)
+app.use("/note", noteRouter)
 
 module.exports = app;
