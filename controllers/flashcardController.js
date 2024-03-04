@@ -1,9 +1,10 @@
 const Flashcard = require('../models/Flashcard')
 
 async function create(req, res){
+    const id = req.params.id
     const data = req.body
     try {
-        const response = await Flashcard.create(data)
+        const response = await Flashcard.create(data, id)
         res.status(201).json(response)
     } catch (e) {
         res.status(500).json({error: e.message})
@@ -30,9 +31,11 @@ async function getOneByCardId(req, res){
 }
 
 async function update(req, res){
+    const id = req.params.id
     const data = req.body
     try {
-        const response = await Flashcard.update(data)
+        const flashcard = await Flashcard.getOneByCardId(id)
+        const response = await flashcard.update(data)
         res.status(200).json(response)
     } catch (e) {
         res.status(404).json({error: e.message})
@@ -40,10 +43,11 @@ async function update(req, res){
 }
 
 async function destroy(req, res){
-    const data = req.params.id
+    const id = req.params.id
     try {
-        const response = await Flashcard.destroy(data)
-        res.status(200).json(response)
+        const flashcard = await Flashcard.getOneByCardId(id)
+        const response = await flashcard.destroy()
+        res.status(204).json(response)
     } catch (e) {
         res.status(404).json({error: e.message})       
     }
