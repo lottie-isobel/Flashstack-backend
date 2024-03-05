@@ -13,9 +13,9 @@ class Note {
         this.category = category
     }
 
-    static async getAll() {
+    static async getAll(userid) {
         const response = await db.query(
-            "SELECT * FROM notes"
+            "SELECT * FROM notes WHERE userid = $1", [userid]
         )
         if (response.rows.length === 0) {
             throw new Error("No notes found");
@@ -24,9 +24,9 @@ class Note {
         return response.rows.map(n => new Note(n));
     }
 
-    static async getByCategory(category) {
+    static async getByCategory(category, userid) {
         const response = await db.query(
-            "SELECT * FROM notes WHERE category LIKE $1", [category]
+            "SELECT * FROM notes WHERE category LIKE $1 AND userid = $2", [category, userid]
         )
         if (response.rows.length === 0) {
             throw new Error("No notes found matching this category");

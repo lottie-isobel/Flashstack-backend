@@ -4,9 +4,9 @@ const noteController = require('../controllers/noteController.js');
 
 const noteRouter = Router();
 
-noteRouter.get("/all", noteController.getAll)
+noteRouter.get("/all/:userid", noteController.getAll)
 noteRouter.post("/", noteController.create)
-noteRouter.get("/category", noteController.getByCategory)
+noteRouter.get("/category/:userid", noteController.getByCategory)
 noteRouter.get("/:id", noteController.getById)
 noteRouter.patch("/:id", noteController.update)
 noteRouter.delete("/:id", noteController.destroy)
