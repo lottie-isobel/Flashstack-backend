@@ -10,8 +10,9 @@ async function create(req, res){
     }
 }
 async function getAll(req, res){
+    const userid = req.params.userid
     try {
-        const response = await Note.getAll()
+        const response = await Note.getAll(userid)
         res.status(200).json(response)
     } catch (e) {
         res.status(404).json({error: e.message})
@@ -29,9 +30,10 @@ async function getById(req, res){
 }
 
 async function getByCategory(req, res){
+    const userid = req.params.userid
     const category = req.body.category
     try{
-        const response = await Note.getByCategory(category)
+        const response = await Note.getByCategory(category, userid)
         res.status(200).json(response)
     } catch (e) {
         res.status(404).json({error: e.message})
