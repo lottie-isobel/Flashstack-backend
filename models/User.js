@@ -10,7 +10,7 @@ class User {
     }
   
     static async getOneById(id) {
-      const response = await db.query("SELECT * FROM Volunteer WHERE userid = $1", [
+      const response = await db.query("SELECT * FROM users WHERE userid = $1", [
         id,
       ]);
       if (response.rows.length != 1) {
@@ -20,7 +20,7 @@ class User {
     }
   
     static async getOneByEmail(email) {
-      const response = await db.query("SELECT * FROM Volunteer WHERE email = $1", [
+      const response = await db.query("SELECT * FROM users WHERE email = $1", [
         email,
       ]);
       if (response.rows.length != 1) {
@@ -32,7 +32,7 @@ class User {
     static async create(data) {
       const { first_name, last_name, email, password } = data;
       let response = await db.query(
-        "INSERT INTO Volunteer (first_name, last_name, email, password) VALUES ($1, $2, $3, $4) RETURNING userid;",
+        "INSERT INTO users (first_name, last_name, email, password) VALUES ($1, $2, $3, $4) RETURNING userid;",
         [first_name, last_name, email, password]
       );
       const newId = response.rows[0].userid;
