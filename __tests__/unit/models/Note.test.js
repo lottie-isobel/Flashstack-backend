@@ -65,11 +65,94 @@ describe('Note', () => {
 
         it("Throws an error when there are no notes in the category", async () => {
             jest.spyOn(db, 'query').mockResolvedValue({ rows: [] })
-            try{
+            try {
                 await Note.getByCategory()
             } catch (error) {
                 expect(error).toBeTruthy()
                 expect(error.message).toBe('No notes found matching this category')
+            }
+        })
+    })
+
+    describe("create", () => {
+        it("Adds a new entry to the database", async () => {
+            let note = {
+                userid: 1,
+                content: 'content1',
+                category: 'category1'
+            }
+            jest.spyOn(db, 'query').mockResolvedValue({ rows: [{ ...note, id: 1 }] })
+
+            const newNote = await Note.create(note)
+            expect(newNote).toBeTruthy()
+            expect(newNote).toHaveProperty('id')
+            expect(newNote.content).toBe('content1')
+            expect(newNote.category).toBe('category1')
+        })
+
+        it("Throws an error if the data is missing", async () => {
+            try {
+                await Note.create({})
+            } catch (error) {
+                expect(error).toBeTruthy()
+                expect(error.message).toBe("Could not create note.")
+            }
+        })
+    })
+
+    describe("update", () => {
+        it("Updates a note with new data", async () => {
+            const note = new Note({
+                userid: 1,
+                content: 'content1',
+                category: 'category1'
+            })
+            jest.spyOn(db, 'query').mockResolvedValue({ rows: [{ 'id': 1, 'userid': 1, 'content': 'content updated', 'category': 'category updated' }] })
+
+            const updatedNote = await note.update({
+                content: 'content updated',
+                category: 'category updated'
+            })
+            expect(updatedNote).toBeInstanceOf(Note)
+            expect(updatedNote.id).toBe(1)
+            expect(updatedNote.content).toBe('content updated')
+            expect(updatedNote.category).toBe('category updated')
+        })
+
+        it("Throws an error when update data is missing", async () => {
+            try {
+                const note = new Note({
+                    userid: 1,
+                    content: 'content1',
+                    category: 'category1'
+                })
+                await note.update({ content: 'content updated' })
+            } catch (error) {
+                expect(error).toBeTruthy()
+                expect(error.message).toBe("Could not update note.")
+            }
+        })
+    })
+
+    describe("destroy", () => {
+        it("Deletes a note from the database", async () => {
+            const note = new Note({})
+            jest.spyOn(db, 'query').mockResolvedValue({ rows: [{ 'id': 1, 'userid': 1, 'content': 'content1', 'category': 'category1' }] }) 
+
+            const deletedNote = await note.destroy()
+            expect(deletedNote).toBeInstanceOf(Note)
+            expect(deletedNote.id).toBe(1)
+            expect(deletedNote).not.toEqual(note)
+        })
+
+        it('Throws an error if the deletion was unsuccessful', async () => {
+            jest.spyOn(db, 'query').mockRejectedValue()
+            try{
+                const note = new Note({ 'id': 1, 'userid': 1, 'content': 'content1', 'category': 'category1' })
+                await note.destroy()
+            } catch(error) {
+                expect(error).toBeTruthy()
+                expect(error.message).toBe('Could not delete note.')
             }
         })
     })
