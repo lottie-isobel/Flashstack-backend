@@ -20,7 +20,7 @@ class Token {
     }
 
     static async getOneById(id) {
-        const response = await db.query("SELECT * FROM token WHERE tokenid = $1", [id]);
+        const response = await db.query("SELECT * FROM tokens WHERE tokenid = $1", [id]);
         if (response.rows.length != 1) {
             throw new Error("Unable to locate token.");
         } else {
@@ -29,7 +29,7 @@ class Token {
     }
 
     static async getOneByToken(token) {
-        const response = await db.query("SELECT * FROM token WHERE token = $1", [token]);
+        const response = await db.query("SELECT * FROM tokens WHERE token = $1", [token]);
         if (response.rows.length != 1) {
             throw new Error("Unable to locate token.");
         } else {
