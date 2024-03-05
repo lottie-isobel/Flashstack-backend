@@ -31,10 +31,10 @@ async function create(req, res){
 }
 
 async function update(req, res){
-    const id = req.params.id
+    const deckid = req.params.id
     const data = req.body
     try {
-        const deck = await Deck.getOneByDeckId(id)
+        const deck = await Deck.getOneByDeckId(deckid)
         const response = await deck.update(data)
         res.status(200).json(response)
     } catch (e) {

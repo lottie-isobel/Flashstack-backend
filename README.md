@@ -15,10 +15,16 @@
 ## Routes
 
 
-| Route | Method | Response |
-| --- | --- | --- |
-| `/cards/deck/:id` | `GET` | Returns all flashcards in the given deck. |
-| `/cards/deck/:id` | `POST` | Creates a new flashcard inside the given deck. |
-| `/cards/:id` | `GET` | Returns data of given card. |
-| `/cards/:id` | `PATCH` | Updates data of given card. |
-| `/cards/:id` | `DELETE` | Deletes given card. |
+| Route | Method | Response | Body Input Parameters
+| --- | --- | --- | --- |
+| `/card/deck/:id` | `GET` | Returns all flashcards in the given deck. | None
+| `/card/deck/:id` | `POST` | Creates a new flashcard inside the given deck. | question (str), answer (str)
+| `/card/:id` | `GET` | Returns data of given card. | None
+| `/card/:id` | `PATCH` | Updates data of given card. | question (str), answer (str)
+| `/card/:id` | `DELETE` | Deletes given card. | None
+| `/deck` | `GET` | Returns all decks belonging to given user. | userid (int)
+| `/deck/:id` | `GET` | Returns data of given deck. | None
+| `/deck` | `POST` | Creates a new deck belonging to given user. | name (str), userid (int)
+| `/deck/:id` | `PATCH` | Updates data of given deck. | name (str)
+| `/deck/:id` | `DELETE` | Deletes given deck. | None
+

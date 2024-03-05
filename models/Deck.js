@@ -29,7 +29,7 @@ class Deck {
 
     static async create(data){
         try {
-            const {name, userid} = data
+            const { name, userid } = data
             const response = await db.query("INSERT INTO decks (name, userid) VALUES ($1, $2) RETURNING *", [name, userid])
             return new Deck(response.rows[0])
         } catch (error) {
@@ -39,9 +39,8 @@ class Deck {
 
     async update(data){
         try {
-            const name = data
-            const deckid = this.deckid
-            const response = await db.query("UPDATE decks SET name = $1 WHERE deckid = $2 RETURNING *", [name, deckid])
+            const { name } = data
+            const response = await db.query("UPDATE decks SET name = $1 WHERE deckid = $2 RETURNING *", [name, this.deckid])
             return new Deck(response.rows[0])
         } catch (error) {
             throw new Error("Could not update deck.")
