@@ -117,7 +117,7 @@ describe("deckController", () => {
 
     describe('destroy', () => {
         it('Returns destroyed entry', async () => {
-            const testDeck = { id: 1, question: 'q', answer: 'a' }
+            const testDeck = { deckid: 1, name: 'n' }
             
             jest.spyOn(Deck, 'getOneByDeckId').mockResolvedValue(new Deck(testDeck))
       
