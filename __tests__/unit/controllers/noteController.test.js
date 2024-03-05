@@ -70,7 +70,7 @@ describe("noteController", () => {
     describe("getByCategory", () => {
         it("Returns notes by category", async () => {
             const testCategory = { 'category': 'test'}
-            const mockReq = { body: { testCategory } }
+            const mockReq = { params: '1', body: { testCategory } }
             const notes = ['note1', 'note2']
             jest.spyOn(Note, 'getByCategory').mockResolvedValue(notes)
 
@@ -83,7 +83,7 @@ describe("noteController", () => {
 
         it("Throws an error", async () => {
             const testCategory = { 'category': 'test'}
-            const mockReq = { body: { testCategory } }
+            const mockReq = { params: '1' , body: { testCategory } }
             jest.spyOn(Note, 'getByCategory').mockRejectedValue(new Error("No notes found matching this category"))
 
             await noteController.getByCategory(mockReq, mockRes)
