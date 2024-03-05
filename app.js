@@ -13,6 +13,8 @@ app.use(cors());
 app.use(express.json());
 app.use(logRoutes)
 app.use('/cards', flashcardRouter)
+app.use("/user", userRouter)
+app.use("/note", noteRouter)
 
 
 app.get("/", (req, res) => {
@@ -22,7 +24,6 @@ app.get("/", (req, res) => {
     })
 })
 
-app.use("/user", userRouter)
-app.use("/note", noteRouter)
+
 
 module.exports = app;
