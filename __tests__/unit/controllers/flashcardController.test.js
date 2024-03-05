@@ -18,7 +18,7 @@ describe("flashcardController", () => {
     })
 
     describe("getAllByDeckId", () => {
-        it("Returns all posts", async () => {
+        it("Returns all cards in deck", async () => {
             const mockReq = { params: '1'}
             const cards = ['card 1', 'card 2']
 
@@ -44,7 +44,7 @@ describe("flashcardController", () => {
     })
 
     describe("getOneByCardId", () => {
-        it("Returns all posts", async () => {
+        it("Returns a card", async () => {
             const mockReq = { params: '1'}
             const card = ['card 1']
 

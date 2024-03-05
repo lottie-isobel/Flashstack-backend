@@ -51,7 +51,7 @@ describe("Flashcard", () => {
     })
 
     describe("create", () => {
-        it("Adds a new entry to the post table", async () => {
+        it("Adds a new entry to the flashcards table", async () => {
             let cardData = { deckid: 1, question: "q", answer: "a" }
             jest.spyOn(db, 'query').mockResolvedValueOnce({ rows: [{ ...cardData, id: 1 }] })
 
