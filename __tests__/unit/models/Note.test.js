@@ -43,9 +43,9 @@ describe('Note', () => {
 
         it("Throws an error if the note is not found", async () => {
             jest.spyOn(db, 'query').mockResolvedValue({ rows: [] })
-            try{
+            try {
                 await Note.getById()
-            } catch(error){
+            } catch (error) {
                 expect(error).toBeTruthy()
                 expect(error.message).toBe('No Note Found With This Id in the Database')
             }
@@ -57,10 +57,20 @@ describe('Note', () => {
         it("should return all notes in a category", async () => {
             jest.spyOn(db, 'query').mockResolvedValue({ rows: [{ 'id': 1, 'userid': 1, 'content': 'content1', 'category': 'category1' }, { 'id': 2, 'userid': 1, 'content': 'content2', 'category': 'category2' }, { 'id': 3, 'userid': 1, 'content': 'content3', 'category': 'category3' }] })
             const notes = await Note.getByCategory('category1', 1)
-            expect(notes).toHaveLength(1)
+            expect(notes).toHaveLength(3)
             expect(notes[0]).toHaveProperty('id')
-            expect(notes[0].content).toBe('content1')
-            expect(notes[0].userid).toBe(1)
+            expect(notes[1].content).toBe('content2')
+            expect(notes[2].userid).toBe(1)
+        })
+
+        it("Throws an error when there are no notes in the category", async () => {
+            jest.spyOn(db, 'query').mockResolvedValue({ rows: [] })
+            try{
+                await Note.getByCategory()
+            } catch (error) {
+                expect(error).toBeTruthy()
+                expect(error.message).toBe('No notes found matching this category')
+            }
         })
     })
 })
