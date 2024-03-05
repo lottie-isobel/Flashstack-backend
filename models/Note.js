@@ -41,7 +41,7 @@ class Note {
         if (response.rows.length === 0) {
             throw new Error("No Note Found With This Id in the Database");
         }
-        return response.rows.map(n => new Note(n));
+        return new Note(response.rows[0]);
     }
 
     static async create(data) {

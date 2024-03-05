@@ -39,9 +39,11 @@ async function getByCategory(req, res){
 }
 
 async function update(req, res){
+    const id = req.params.id
     const data = req.body
     try {
-        const response = await Note.update(data)
+        const note = await Note.getById(id)
+        const response = await note.update(data)
         res.status(200).json(response)
     } catch (e) {
         res.status(404).json({error: e.message})
@@ -49,10 +51,11 @@ async function update(req, res){
 }
 
 async function destroy(req, res){
-    const data = req.params.id
+    const id = req.params.id
     try {
-        const response = await Note.destroy(data)
-        res.status(200).json(response)
+        const note = await Note.getById(id)
+        const response = await note.destroy()
+        res.status(204).json(response)
     } catch (e) {
         res.status(404).json({error: e.message})       
     }
