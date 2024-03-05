@@ -83,7 +83,7 @@ describe("noteController", () => {
 
         it("Throws an error", async () => {
             const testCategory = { 'category': 'test'}
-            const mockReq = { params: '1' ,body: { testCategory } }
+            const mockReq = { params: '1' , body: { testCategory } }
             jest.spyOn(Note, 'getByCategory').mockRejectedValue(new Error("No notes found matching this category"))
 
             await noteController.getByCategory(mockReq, mockRes)
