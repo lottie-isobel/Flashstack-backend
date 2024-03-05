@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const logRoutes = require('./middleware/logger');
+const authenticator = require('./middleware/authenticator')
 
 const app = express();
 
@@ -13,10 +14,10 @@ const deckRouter = require('./routes/deckRoutes')
 app.use(cors());
 app.use(express.json());
 app.use(logRoutes)
-app.use('/card', flashcardRouter)
+app.use('/card', authenticator, flashcardRouter)
 app.use("/user", userRouter)
-app.use("/note", noteRouter)
-app.use("/deck", deckRouter)
+app.use("/note", authenticator, noteRouter)
+app.use("/deck", authenticator, deckRouter)
 
 
 app.get("/", (req, res) => {
