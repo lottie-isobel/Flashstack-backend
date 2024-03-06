@@ -28,6 +28,11 @@ class User {
       }
       return new User(response.rows[0]);
     }
+
+    static async getOneByToken(token){
+      const response = await db.query("SELECT u.* FROM tokens t JOIN users u ON t.userid = u.userid WHERE t.token = $1;", [token])
+      return new User(response.rows[0])
+    }
   
     static async create(data) {
       const { first_name, last_name, email, password } = data;

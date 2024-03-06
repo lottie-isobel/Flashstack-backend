@@ -37,6 +37,16 @@ async function login (req, res) {
     }
 }
 
+async function getOneByToken (req, res) {
+    const token = req.body.token
+    try {
+        const result = await User.getOneByToken(token)
+        res.status(200).send(result)
+    } catch (error) {
+        res.status(404).json({error: error.message})
+    }
+}
+
 module.exports = {
-    register, login
+    register, login, getOneByToken
 }   
