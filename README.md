@@ -37,7 +37,7 @@
 | `/note/:id` | `PATCH` | Updates the data of a given note. | content (str), category (str)
 | `/note` | `POST` | Creates a new note for a given user. | userid (int), content (str), category (str)
 | --- | --- | --- | --- |
-| `/user` | `GET` | Gets data about given token. | token (str)
+| `/user` | `GET` | Gets user data linked to given token. | token (str)
 | `/user/register` | `POST` | Creates a new user. | first_name (str), last_name (str), email (str), password (str)
 | `/user/login` | `POST` | Creates a new token. | email (str), password (str)
 | `/user/logout` | `DELETE` | Deletes the current token. | token (str)
