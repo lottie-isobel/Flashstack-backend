@@ -25,7 +25,7 @@
 | `/card/:id` | `PATCH` | Updates data of given card. | question (str), answer (str)
 | `/card/:id` | `DELETE` | Deletes given card. | None
 | --- | --- | --- | --- |
-| `/deck` | `GET` | Returns all decks belonging to given user. | None
+| `/deck/:userid` | `GET` | Returns all decks belonging to given user. | None
 | `/deck/:id` | `GET` | Returns data of given deck. | None
 | `/deck` | `POST` | Creates a new deck belonging to given user. | name (str), userid (int)
 | `/deck/:id` | `PATCH` | Updates data of given deck. | name (str)
