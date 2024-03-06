@@ -19,6 +19,11 @@ class Token {
         return newToken
     }
 
+    async destroy(token) {
+        const response = await db.query("DELETE FROM tokens WHERE token = $1 RETURNING *", [token])
+        return response.rows[0]
+    }
+
     static async getOneById(id) {
         const response = await db.query("SELECT * FROM tokens WHERE tokenid = $1", [id]);
         if (response.rows.length != 1) {
