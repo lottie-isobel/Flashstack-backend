@@ -4,7 +4,7 @@ const deckController = require('../controllers/deckController.js');
 
 const deckRouter = Router();
 
-deckRouter.get("/:userid", deckController.getAllByUserId)
+deckRouter.get("/user/:id", deckController.getAllByUserId)
 deckRouter.get("/:id", deckController.getOneByDeckId)
 deckRouter.post("/", deckController.create)
 deckRouter.patch("/:id", deckController.update)

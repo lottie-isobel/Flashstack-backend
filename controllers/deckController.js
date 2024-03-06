@@ -1,12 +1,12 @@
 const Deck = require("../models/Deck")
 
-async function getAllByUserId(req, res){
-    const data = req.params.userid
+async function getAllByUserId(req, res) {
+    const data = req.params.id;
     try {
-        const response = await Deck.getAllByUserId(data)
-        res.status(200).json(response)
+        const response = await Deck.getAllByUserId(data);
+        res.status(200).json(response);
     } catch (e) {
-        res.status(404).json({error: e.message})
+        res.status(404).json({ error: e.message });
     }
 }
 
