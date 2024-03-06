@@ -9,8 +9,8 @@ class Deck {
 
     static async getAllByUserId(data) {
         try {
-            const { userid } = data
-            const response = await db.query("SELECT * FROM decks WHERE userid = $1", [userid])
+            const id = data
+            const response = await db.query("SELECT * FROM decks WHERE userid = $1", [id])
             return(response.rows.map(d => new Deck(d)))
         } catch (error) {
             throw new Error("Could not get decks.")
