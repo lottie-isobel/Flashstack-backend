@@ -1,5 +1,15 @@
 const Token = require('../models/Token')
 
+async function getOneByToken(req, res){
+    try {
+        const token = req.body.token
+        const response = await Token.getOneByToken(token)
+        res.status(200).json(response)
+    } catch (error) {
+        res.status(404).json({error: error.message})
+    }
+}
+
 async function logout (req, res) {
     const token = req.body.token
     try {
@@ -11,4 +21,4 @@ async function logout (req, res) {
     }
 }
 
-module.exports = { logout }
+module.exports = { getOneByToken, logout }

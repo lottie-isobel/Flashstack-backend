@@ -5,6 +5,7 @@ const tokenController = require('../controllers/tokenController.js');
 
 const userRouter = Router();
 
+userRouter.get("/", tokenController.getOneByToken)
 userRouter.post("/register", userController.register);
 userRouter.post("/login", userController.login);
 userRouter.delete("/logout", tokenController.logout)
