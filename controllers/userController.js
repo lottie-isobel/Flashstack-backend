@@ -38,7 +38,7 @@ async function login (req, res) {
 }
 
 async function getOneByToken (req, res) {
-    const token = req.body.token
+    const token = req.params.token
     try {
         const result = await User.getOneByToken(token)
         res.status(200).send(result)
