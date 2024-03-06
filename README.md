@@ -39,5 +39,6 @@
 | --- | --- | --- | --- |
 | `/user/register` | `POST` | Creates a new user. | first_name (str), last_name (str), email (str), password (str)
 | `/user/login` | `POST` | Creates a new token. | email (str), password (str)
+| `/user/logout` | `DELETE` | Deletes the current token. | token (str)
 
 
