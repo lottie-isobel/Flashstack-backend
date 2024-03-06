@@ -1,7 +1,7 @@
 const Deck = require("../models/Deck")
 
 async function getAllByUserId(req, res){
-    const data = req.body
+    const data = req.params.userid
     try {
         const response = await Deck.getAllByUserId(data)
         res.status(200).json(response)
