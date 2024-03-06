@@ -19,8 +19,8 @@ class Token {
         return newToken
     }
 
-    async destroy(token) {
-        const response = await db.query("DELETE FROM tokens WHERE token = $1 RETURNING *", [token])
+    async destroy() {
+        const response = await db.query("DELETE FROM tokens WHERE token = $1 RETURNING *", [this.token])
         return response.rows[0]
     }
 
