@@ -35,7 +35,7 @@ class Flashcard {
             const response = await db.query("INSERT INTO flashcards (question, answer, deckid) VALUES ($1, $2, $3) RETURNING *", [question, answer, deck_id])
             return new Flashcard(response.rows[0])
         } catch (error) {
-            throw new Error("Could not create flashcard.")
+            throw new Error({error: error.message})
         }
     }
 
